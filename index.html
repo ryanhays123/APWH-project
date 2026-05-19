@@ -1,157 +1,321 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>English I Writing Resource</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>My Website</title>
   <style>
-    body { font-family: Arial, sans-serif; margin: 0; padding: 0; color: #333; line-height: 1.6; }
-    header { background: #00539C; color: #fff; padding: 1rem; text-align: center; }
-    nav { background: #004080; }
-    nav ul { list-style: none; margin: 0; padding: 0.5rem; display: flex; justify-content: center; }
-    nav li { margin: 0 1rem; }
-    nav a { color: #fff; text-decoration: none; font-weight: bold; }
-    nav a:hover { text-decoration: underline; }
-    main { max-width: 800px; margin: 2rem auto; padding: 0 1rem; }
-    section { margin-bottom: 2rem; }
-    section h2 { border-bottom: 2px solid #00539C; padding-bottom: 0.5rem; }
-    .term-list ul { list-style: disc; margin-left: 1.5rem; }
-    .tip, .example { margin-bottom: 1rem; }
-    footer { background: #f4f4f4; text-align: center; padding: 1rem; font-size: 0.9rem; }
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: Arial, sans-serif;
+      background: #f7f7f7;
+      color: #222;
+      line-height: 1.6;
+    }
+
+    header {
+      background: white;
+      padding: 20px 8%;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.06);
+      position: sticky;
+      top: 0;
+      z-index: 10;
+    }
+
+    .logo {
+      font-size: 1.4rem;
+      font-weight: bold;
+    }
+
+    nav a {
+      margin-left: 20px;
+      text-decoration: none;
+      color: #222;
+      font-weight: 500;
+    }
+
+    nav a:hover {
+      color: #5a67d8;
+    }
+
+    .hero {
+      min-height: 80vh;
+      padding: 80px 8%;
+      display: grid;
+      grid-template-columns: 1.1fr 0.9fr;
+      gap: 40px;
+      align-items: center;
+      background: linear-gradient(135deg, #eef2ff, #ffffff);
+    }
+
+    .hero h1 {
+      font-size: 3rem;
+      margin-bottom: 18px;
+      line-height: 1.1;
+    }
+
+    .hero p {
+      font-size: 1.1rem;
+      max-width: 600px;
+      margin-bottom: 28px;
+      color: #444;
+    }
+
+    .button {
+      display: inline-block;
+      background: #5a67d8;
+      color: white;
+      padding: 12px 22px;
+      border-radius: 999px;
+      text-decoration: none;
+      font-weight: bold;
+    }
+
+    .button:hover {
+      background: #434190;
+    }
+
+    .hero img {
+      width: 100%;
+      border-radius: 24px;
+      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
+      object-fit: cover;
+      max-height: 480px;
+    }
+
+    section {
+      padding: 70px 8%;
+    }
+
+    .section-title {
+      font-size: 2rem;
+      margin-bottom: 18px;
+      text-align: center;
+    }
+
+    .section-subtitle {
+      text-align: center;
+      color: #555;
+      max-width: 700px;
+      margin: 0 auto 40px;
+    }
+
+    .about-card {
+      background: white;
+      border-radius: 20px;
+      padding: 35px;
+      max-width: 900px;
+      margin: 0 auto;
+      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.07);
+    }
+
+    .gallery {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 22px;
+    }
+
+    .gallery-card {
+      background: white;
+      border-radius: 18px;
+      overflow: hidden;
+      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.08);
+    }
+
+    .gallery-card img {
+      width: 100%;
+      height: 240px;
+      object-fit: cover;
+      display: block;
+    }
+
+    .gallery-card div {
+      padding: 18px;
+    }
+
+    .gallery-card h3 {
+      margin-bottom: 8px;
+    }
+
+    .projects {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 22px;
+    }
+
+    .project-card {
+      background: white;
+      padding: 28px;
+      border-radius: 18px;
+      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.07);
+    }
+
+    .project-card h3 {
+      margin-bottom: 10px;
+    }
+
+    .contact {
+      background: #222;
+      color: white;
+      text-align: center;
+    }
+
+    .contact p {
+      margin-bottom: 20px;
+      color: #ddd;
+    }
+
+    .contact a {
+      color: white;
+    }
+
+    footer {
+      background: #111;
+      color: #aaa;
+      text-align: center;
+      padding: 20px;
+      font-size: 0.9rem;
+    }
+
+    @media (max-width: 850px) {
+      header {
+        flex-direction: column;
+        gap: 12px;
+      }
+
+      nav a {
+        margin: 0 8px;
+      }
+
+      .hero {
+        grid-template-columns: 1fr;
+        text-align: center;
+      }
+
+      .hero p {
+        margin-left: auto;
+        margin-right: auto;
+      }
+
+      .gallery,
+      .projects {
+        grid-template-columns: 1fr;
+      }
+
+      .hero h1 {
+        font-size: 2.3rem;
+      }
+    }
   </style>
 </head>
 <body>
   <header>
-    <h1>English I Writing Resource</h1>
+    <div class="logo">My Website</div>
+    <nav>
+      <a href="#about">About</a>
+      <a href="#gallery">Gallery</a>
+      <a href="#projects">Projects</a>
+      <a href="#contact">Contact</a>
+    </nav>
   </header>
-  <nav>
-    <ul>
-      <li><a href="#information">Information</a></li>
-      <li><a href="#key-terms">Key Terms</a></li>
-      <li><a href="#tips">Tips</a></li>
-      <li><a href="#examples">Examples</a></li>
-    </ul>
-  </nav>
+
   <main>
-    <!-- Information Section -->
-    <section id="information">
-      <h2>Information</h2>
-      <p>This site collects all the writing essentials we covered in English I: key terms organized by unit, practical writing tips, and examples from our class assignments. Use the navigation above to jump to any section.</p>
+    <section class="hero">
+      <div>
+        <h1>Hi, I’m Your Name.</h1>
+        <p>
+          Welcome to my website. This is a simple GitHub Pages site where you can share your work,
+          photos, projects, portfolio, or personal story.
+        </p>
+        <a class="button" href="#gallery">See My Work</a>
+      </div>
+
+      <!-- Replace this image with your own: images/hero.jpg -->
+      <img src="images/hero.jpg" alt="Main website image" onerror="this.src='https://picsum.photos/700/500?random=1'" />
     </section>
 
-    <!-- Key Terms Section -->
-    <section id="key-terms">
-      <h2>Key Terms</h2>
-      <div class="term-list">
-        <h3>Unit 1: The Power of Words</h3>
-        <ul>
-          <li><strong>Plot</strong> – The sequence of events in a narrative, organized around conflict and resolution.</li>
-          <li><strong>Point of View</strong> – The narrator’s perspective, such as first-person or third-person.</li>
-          <li><strong>Metaphor</strong> – A direct comparison between two unlike things without using “like” or “as.”</li>
-          <li><strong>Indirect Characterization</strong> – Revealing a character’s traits through actions, dialogue, and thoughts.</li>
-          <li><strong>Speaker</strong> – The voice or persona speaking in a poem or narrative.</li>
-          <li><strong>Unreliable Narrator</strong> – A narrator whose credibility is compromised, prompting readers to question the narrative.</li>
-          <li><strong>Direct Characterization</strong> – Explicitly describing a character’s traits by the narrator or another character.</li>
-          <li><strong>Simile</strong> – A comparison using “like” or “as.”</li>
-        </ul>
-        <h3>Unit 2: Silence and Voice</h3>
-        <ul>
-          <li><strong>Types of Characters</strong> – Static vs. dynamic and round vs. flat characters.</li>
-          <li><strong>Point of View</strong> – (See Unit 1) how perspective shapes understanding.</li>
-          <li><strong>Thesis Statement</strong> – A clear, concise claim that guides an essay’s argument.</li>
-          <li><strong>Indirect Characterization</strong> – (See Unit 1) used in literary analysis to show motives.</li>
-          <li><strong>Theme</strong> – The central idea or message of a literary work.</li>
-          <li><strong>Quote Integration</strong> – Introducing, embedding, and explaining textual evidence.</li>
-          <li><strong>Direct Characterization</strong> – (See Unit 1).</li>
-          <li><strong>Imagery</strong> – Descriptive language appealing to the senses.</li>
-          <li><strong>Narrative Structures</strong> – Frameworks like linear chronology, flashbacks, and framed narratives.</li>
-        </ul>
-        <h3>Unit 3: Risks and Challenges</h3>
-        <ul>
-          <li><strong>Ethos</strong> – Persuasion through credibility and character.</li>
-          <li><strong>Body Language</strong> – Nonverbal cues like gestures and posture that reinforce a message.</li>
-          <li><strong>Speech Structure</strong> – Organized format: introduction, body, conclusion, with clear transitions.</li>
-          <li><strong>Pathos</strong> – Persuasion through emotional appeal.</li>
-          <li><strong>Voice</strong> – The distinctive style or tone of a speaker or writer.</li>
-          <li><strong>Logos</strong> – Persuasion through logical argument and evidence.</li>
-          <li><strong>Audience</strong> – The intended recipients whose values influence content and tone.</li>
-        </ul>
-        <h3>Unit 4: The Hero’s Journey</h3>
-        <ul>
-          <li><strong>Hero’s Journey</strong> – Campbell’s monomyth of departure, initiation, and return.</li>
-          <li><strong>Invocation of the Muse</strong> – A plea for divine inspiration at the start of an epic.</li>
-          <li><strong>Divine Intervention</strong> – Supernatural forces influencing events.</li>
-          <li><strong>Epic Poem</strong> – A long narrative celebrating heroic deeds.</li>
-          <li><strong>Epithet</strong> – A descriptive phrase, such as “rosy-fingered dawn.”</li>
-          <li><strong>Symbols</strong> – Objects or actions representing larger ideas.</li>
-          <li><strong>Epic Hero</strong> – A protagonist with larger-than-life qualities.</li>
-          <li><strong>Epic Similes & Metaphors</strong> – Extended comparisons that enhance imagery.</li>
-          <li><strong>Repetition</strong> – The deliberate reuse of words or phrases for emphasis.</li>
-        </ul>
-        <h3>Unit 5: Shadows and Echoes</h3>
-        <ul>
-          <li><strong>Frame Story</strong> – A narrative within a narrative.</li>
-          <li><strong>Conflict</strong> – The struggle driving a story’s action.</li>
-          <li><strong>Symbolism</strong> – (See Unit 4) darker motifs in gothic settings.</li>
-          <li><strong>Mystery</strong> – Suspenseful elements that engage readers.</li>
-          <li><strong>Imagery</strong> – (See Unit 2).</li>
-          <li><strong>Historical Context</strong> – The time and culture backdrop of a text.</li>
-          <li><strong>Mood</strong> – The emotional atmosphere created by a work.</li>
-          <li><strong>Protagonist & Antagonist</strong> – Main character vs. opposing force.</li>
-          <li><strong>Repetition</strong> – (See Unit 4).</li>
-        </ul>
-        <h3>Unit 6: Ambition and Downfall</h3>
-        <ul>
-          <li><strong>Tragic Drama</strong> – A play ending in catastrophe for the protagonist.</li>
-          <li><strong>Hamartia</strong> – The protagonist’s fatal flaw.</li>
-          <li><strong>Foil Characters</strong> – Contrasting characters that highlight traits.</li>
-          <li><strong>Tragic Hero</strong> – A noble character undone by a personal weakness.</li>
-          <li><strong>Allusions</strong> – References to classical, literary, or biblical works.</li>
-          <li><strong>Aside</strong> – A remark to the audience unheard by other characters.</li>
-          <li><strong>Soliloquy</strong> – A speech revealing a character’s inner thoughts.</li>
-        </ul>
+    <section id="about">
+      <h2 class="section-title">About Me</h2>
+      <p class="section-subtitle">A short section where you can explain who you are and what this website is about.</p>
+      <div class="about-card">
+        <p>
+          Write a short paragraph here about yourself, your interests, your school, your work, or whatever
+          this website is meant to show. You can make this a personal page, a project page, a club page,
+          a portfolio, or a photo gallery.
+        </p>
       </div>
     </section>
 
-    <!-- Tips Section -->
-    <section id="tips">
-      <h2>Writing Tips</h2>
-      <div class="tip">
-        <strong>Plan First:</strong> Before drafting, create a detailed outline with your thesis statement at the top, list your main points in logical order, and under each point jot down specific evidence (quotations, data, examples). This roadmap ensures focus, highlights gaps early, and speeds up the writing process.
-      </div>
-      <div class="tip">
-        <strong>Show, Don’t Tell:</strong> Engage readers using vivid sensory language that paints a picture—describe sights, sounds, tastes, smells, and textures. For example, instead of “She was afraid,” write “Her pulse thundered as she edged down the shadowed corridor.” This immerses readers in the scene.
-      </div>
-      <div class="tip">
-        <strong>Quote Integration:</strong> Introduce each quotation by naming the speaker or setting the context, insert the quote in quotation marks, then analyze its significance. Example: <em>Lady Macbeth’s plea “Unsex me here” (Shakespeare 1.5.39) reveals her desire to cast off feminine weakness.</em>
-      </div>
-      <div class="tip">
-        <strong>Vary Sentence Structure:</strong> Maintain interest by mixing short, impactful sentences with compound and complex structures. This balance creates a dynamic rhythm and emphasizes key ideas.
-      </div>
-      <div class="tip">
-        <strong>Proofread Carefully:</strong> After writing, take a break, then read your draft aloud to catch errors or awkward phrasing. Check grammar, punctuation, and MLA formatting—including in-text citations, Works Cited entries, headers, and margins—for a polished final draft.
+    <section id="gallery">
+      <h2 class="section-title">Image Gallery</h2>
+      <p class="section-subtitle">Replace these with your own images by adding files to an images folder.</p>
+
+      <div class="gallery">
+        <div class="gallery-card">
+          <img src="images/photo1.jpg" alt="Gallery image one" onerror="this.src='https://picsum.photos/600/400?random=2'" />
+          <div>
+            <h3>Photo One</h3>
+            <p>Add a short caption here.</p>
+          </div>
+        </div>
+
+        <div class="gallery-card">
+          <img src="images/photo2.jpg" alt="Gallery image two" onerror="this.src='https://picsum.photos/600/400?random=3'" />
+          <div>
+            <h3>Photo Two</h3>
+            <p>Add a short caption here.</p>
+          </div>
+        </div>
+
+        <div class="gallery-card">
+          <img src="images/photo3.jpg" alt="Gallery image three" onerror="this.src='https://picsum.photos/600/400?random=4'" />
+          <div>
+            <h3>Photo Three</h3>
+            <p>Add a short caption here.</p>
+          </div>
+        </div>
       </div>
     </section>
 
-    <!-- Examples Section -->
-    <section id="examples">
-      <h2>Examples</h2>
-      <div class="example">
-        <h3>Thesis Example</h3>
-        <p>“In Macbeth, Shakespeare uses irony to reveal the corrosive effects of unchecked ambition on the human soul.” (Shakespeare 1.5.23)</p>
+    <section id="projects">
+      <h2 class="section-title">Projects</h2>
+      <p class="section-subtitle">Use this section to show school projects, GitHub projects, clubs, writing, or anything else.</p>
+
+      <div class="projects">
+        <div class="project-card">
+          <h3>Project One</h3>
+          <p>Describe your first project here. You can also add a link to another page or GitHub repository.</p>
+        </div>
+
+        <div class="project-card">
+          <h3>Project Two</h3>
+          <p>Describe your second project here. Keep it short and clear.</p>
+        </div>
+
+        <div class="project-card">
+          <h3>Project Three</h3>
+          <p>Describe your third project here. This can be edited or deleted.</p>
+        </div>
       </div>
-      <div class="example">
-        <h3>Topic Sentence Example</h3>
-        <p>“The episodic structure of The Odyssey highlights Odysseus’s growth as both leader and individual through a series of trials.” (Homer 12.161-162)</p>
-      </div>
-      <div class="example">
-        <h3>Poetry Excerpt</h3>
-        <p>Beneath the silver moon’s pale glow I wandered roads I used to know. (Made By me) <em>(Imagery, end rhyme, enjambment)</em></p>
-      </div>
+    </section>
+
+    <section id="contact" class="contact">
+      <h2 class="section-title">Contact</h2>
+      <p>Want to reach me? Add your email, Instagram, LinkedIn, or GitHub here.</p>
+      <a class="button" href="mailto:your-email@example.com">Email Me</a>
     </section>
   </main>
+
   <footer>
-    &copy; 2025 English I Writing Resource
+    <p>© 2026 Your Name. Built with GitHub Pages.</p>
   </footer>
 </body>
 </html>
