@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>My Website</title>
+  <title>Timeline Presentation Website</title>
   <style>
     * {
       box-sizing: border-box;
@@ -11,188 +11,331 @@
       padding: 0;
     }
 
+    html {
+      scroll-behavior: smooth;
+    }
+
     body {
       font-family: Arial, sans-serif;
-      background: #f7f7f7;
-      color: #222;
+      background: #0f172a;
+      color: #f8fafc;
       line-height: 1.6;
     }
 
     header {
-      background: white;
-      padding: 20px 8%;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      z-index: 100;
       display: flex;
       justify-content: space-between;
       align-items: center;
-      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.06);
-      position: sticky;
-      top: 0;
-      z-index: 10;
+      padding: 18px 8%;
+      background: rgba(15, 23, 42, 0.88);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid rgba(255, 255, 255, 0.1);
     }
 
     .logo {
-      font-size: 1.4rem;
       font-weight: bold;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: #c4b5fd;
     }
 
     nav a {
-      margin-left: 20px;
+      margin-left: 18px;
+      color: #e2e8f0;
       text-decoration: none;
-      color: #222;
-      font-weight: 500;
+      font-size: 0.95rem;
     }
 
     nav a:hover {
-      color: #5a67d8;
+      color: #c4b5fd;
+    }
+
+    .slide {
+      min-height: 100vh;
+      padding: 110px 8% 70px;
+      display: grid;
+      align-items: center;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.08);
     }
 
     .hero {
-      min-height: 80vh;
-      padding: 80px 8%;
-      display: grid;
       grid-template-columns: 1.1fr 0.9fr;
-      gap: 40px;
-      align-items: center;
-      background: linear-gradient(135deg, #eef2ff, #ffffff);
+      gap: 45px;
+      background:
+        radial-gradient(circle at top left, rgba(196, 181, 253, 0.25), transparent 35%),
+        linear-gradient(135deg, #0f172a, #1e293b);
     }
 
-    .hero h1 {
-      font-size: 3rem;
-      margin-bottom: 18px;
-      line-height: 1.1;
+    .eyebrow {
+      color: #c4b5fd;
+      text-transform: uppercase;
+      letter-spacing: 0.14em;
+      font-size: 0.85rem;
+      font-weight: bold;
+      margin-bottom: 14px;
+    }
+
+    h1 {
+      font-size: clamp(3rem, 7vw, 6rem);
+      line-height: 0.95;
+      margin-bottom: 24px;
+    }
+
+    h2 {
+      font-size: clamp(2.2rem, 5vw, 4rem);
+      line-height: 1;
+      margin-bottom: 22px;
+    }
+
+    h3 {
+      font-size: 1.4rem;
+      margin-bottom: 10px;
+    }
+
+    p {
+      color: #cbd5e1;
+      font-size: 1.05rem;
     }
 
     .hero p {
-      font-size: 1.1rem;
-      max-width: 600px;
-      margin-bottom: 28px;
-      color: #444;
+      max-width: 620px;
+      font-size: 1.2rem;
+      margin-bottom: 30px;
+    }
+
+    .button-row {
+      display: flex;
+      gap: 14px;
+      flex-wrap: wrap;
     }
 
     .button {
       display: inline-block;
-      background: #5a67d8;
-      color: white;
       padding: 12px 22px;
       border-radius: 999px;
+      background: #8b5cf6;
+      color: white;
       text-decoration: none;
       font-weight: bold;
+      box-shadow: 0 12px 24px rgba(139, 92, 246, 0.28);
     }
 
-    .button:hover {
-      background: #434190;
+    .button.secondary {
+      background: transparent;
+      border: 1px solid rgba(255, 255, 255, 0.28);
+      box-shadow: none;
     }
 
-    .hero img {
+    .image-frame {
+      position: relative;
+      border-radius: 28px;
+      overflow: hidden;
+      box-shadow: 0 25px 60px rgba(0, 0, 0, 0.35);
+      border: 1px solid rgba(255, 255, 255, 0.18);
+      background: rgba(255, 255, 255, 0.08);
+    }
+
+    .image-frame img {
       width: 100%;
-      border-radius: 24px;
-      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
+      height: 520px;
+      display: block;
       object-fit: cover;
-      max-height: 480px;
     }
 
-    section {
-      padding: 70px 8%;
+    .caption {
+      position: absolute;
+      left: 18px;
+      right: 18px;
+      bottom: 18px;
+      padding: 14px 16px;
+      border-radius: 16px;
+      background: rgba(15, 23, 42, 0.78);
+      backdrop-filter: blur(10px);
+      color: #f8fafc;
+      font-size: 0.95rem;
     }
 
-    .section-title {
-      font-size: 2rem;
-      margin-bottom: 18px;
-      text-align: center;
+    .intro {
+      background: #111827;
     }
 
-    .section-subtitle {
-      text-align: center;
-      color: #555;
-      max-width: 700px;
-      margin: 0 auto 40px;
-    }
-
-    .about-card {
-      background: white;
-      border-radius: 20px;
-      padding: 35px;
-      max-width: 900px;
+    .centered {
+      max-width: 950px;
       margin: 0 auto;
-      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.07);
+      text-align: center;
     }
 
-    .gallery {
+    .stat-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 20px;
+      margin-top: 40px;
+    }
+
+    .stat-card {
+      background: rgba(255, 255, 255, 0.08);
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      border-radius: 22px;
+      padding: 28px;
+      text-align: left;
+    }
+
+    .stat-number {
+      font-size: 2.6rem;
+      line-height: 1;
+      color: #c4b5fd;
+      font-weight: bold;
+      margin-bottom: 12px;
+    }
+
+    .timeline-slide {
+      background:
+        radial-gradient(circle at top right, rgba(59, 130, 246, 0.22), transparent 32%),
+        #0f172a;
+    }
+
+    .timeline {
+      position: relative;
+      max-width: 1050px;
+      margin: 42px auto 0;
+    }
+
+    .timeline::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      bottom: 0;
+      left: 50%;
+      width: 3px;
+      transform: translateX(-50%);
+      background: linear-gradient(#8b5cf6, #38bdf8);
+      border-radius: 999px;
+    }
+
+    .timeline-item {
+      position: relative;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 55px;
+      margin-bottom: 55px;
+      align-items: center;
+    }
+
+    .timeline-item:nth-child(even) .timeline-content {
+      grid-column: 2;
+    }
+
+    .timeline-item:nth-child(even) .timeline-image {
+      grid-column: 1;
+      grid-row: 1;
+    }
+
+    .dot {
+      position: absolute;
+      left: 50%;
+      top: 28px;
+      width: 18px;
+      height: 18px;
+      transform: translateX(-50%);
+      border-radius: 50%;
+      background: #c4b5fd;
+      box-shadow: 0 0 0 8px rgba(196, 181, 253, 0.16);
+    }
+
+    .timeline-content,
+    .timeline-image {
+      background: rgba(255, 255, 255, 0.08);
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      border-radius: 22px;
+      overflow: hidden;
+    }
+
+    .timeline-content {
+      padding: 28px;
+    }
+
+    .year {
+      display: inline-block;
+      margin-bottom: 12px;
+      padding: 5px 12px;
+      border-radius: 999px;
+      background: rgba(196, 181, 253, 0.16);
+      color: #ddd6fe;
+      font-weight: bold;
+      font-size: 0.9rem;
+    }
+
+    .timeline-image img {
+      width: 100%;
+      height: 270px;
+      object-fit: cover;
+      display: block;
+    }
+
+    .gallery-slide {
+      background: #111827;
+    }
+
+    .gallery-grid {
       display: grid;
       grid-template-columns: repeat(3, 1fr);
       gap: 22px;
+      margin-top: 38px;
     }
 
     .gallery-card {
-      background: white;
-      border-radius: 18px;
+      border-radius: 22px;
       overflow: hidden;
-      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.08);
+      background: rgba(255, 255, 255, 0.08);
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      transition: transform 0.2s ease;
+    }
+
+    .gallery-card:hover {
+      transform: translateY(-6px);
     }
 
     .gallery-card img {
       width: 100%;
-      height: 240px;
+      height: 250px;
       object-fit: cover;
       display: block;
     }
 
     .gallery-card div {
-      padding: 18px;
+      padding: 20px;
     }
 
-    .gallery-card h3 {
-      margin-bottom: 8px;
-    }
-
-    .projects {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 22px;
-    }
-
-    .project-card {
-      background: white;
-      padding: 28px;
-      border-radius: 18px;
-      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.07);
-    }
-
-    .project-card h3 {
-      margin-bottom: 10px;
-    }
-
-    .contact {
-      background: #222;
-      color: white;
+    .final-slide {
+      min-height: 80vh;
       text-align: center;
-    }
-
-    .contact p {
-      margin-bottom: 20px;
-      color: #ddd;
-    }
-
-    .contact a {
-      color: white;
+      background:
+        radial-gradient(circle at center, rgba(139, 92, 246, 0.25), transparent 35%),
+        #0f172a;
     }
 
     footer {
-      background: #111;
-      color: #aaa;
+      padding: 20px 8%;
       text-align: center;
-      padding: 20px;
+      color: #94a3b8;
+      background: #020617;
       font-size: 0.9rem;
     }
 
-    @media (max-width: 850px) {
+    @media (max-width: 900px) {
       header {
         flex-direction: column;
-        gap: 12px;
+        gap: 10px;
       }
 
       nav a {
-        margin: 0 8px;
+        margin: 0 7px;
+        font-size: 0.85rem;
       }
 
       .hero {
@@ -200,117 +343,206 @@
         text-align: center;
       }
 
-      .hero p {
-        margin-left: auto;
-        margin-right: auto;
+      .button-row {
+        justify-content: center;
       }
 
-      .gallery,
-      .projects {
+      .image-frame img {
+        height: 360px;
+      }
+
+      .stat-grid,
+      .gallery-grid {
         grid-template-columns: 1fr;
       }
 
-      .hero h1 {
-        font-size: 2.3rem;
+      .timeline::before {
+        left: 10px;
+      }
+
+      .timeline-item,
+      .timeline-item:nth-child(even) {
+        grid-template-columns: 1fr;
+        gap: 16px;
+        padding-left: 35px;
+      }
+
+      .timeline-item:nth-child(even) .timeline-content,
+      .timeline-item:nth-child(even) .timeline-image {
+        grid-column: auto;
+        grid-row: auto;
+      }
+
+      .dot {
+        left: 10px;
       }
     }
   </style>
 </head>
 <body>
   <header>
-    <div class="logo">My Website</div>
+    <div class="logo">Timeline Project</div>
     <nav>
-      <a href="#about">About</a>
-      <a href="#gallery">Gallery</a>
-      <a href="#projects">Projects</a>
-      <a href="#contact">Contact</a>
+      <a href="#start">Start</a>
+      <a href="#overview">Overview</a>
+      <a href="#timeline">Timeline</a>
+      <a href="#gallery">Images</a>
+      <a href="#ending">End</a>
     </nav>
   </header>
 
   <main>
-    <section class="hero">
+    <section id="start" class="slide hero">
       <div>
-        <h1>Hi, I’m Your Name.</h1>
+        <div class="eyebrow">Presentation Website</div>
+        <h1>Your Big Title Here</h1>
         <p>
-          Welcome to my website. This is a simple GitHub Pages site where you can share your work,
-          photos, projects, portfolio, or personal story.
+          Use this opening slide to introduce your topic, person, project, event, or story. It feels more like a presentation than a regular website.
         </p>
-        <a class="button" href="#gallery">See My Work</a>
+        <div class="button-row">
+          <a class="button" href="#timeline">View Timeline</a>
+          <a class="button secondary" href="#gallery">See Images</a>
+        </div>
       </div>
 
-      <!-- Replace this image with your own: images/hero.jpg -->
-      <img src="images/hero.jpg" alt="Main website image" onerror="this.src='https://picsum.photos/700/500?random=1'" />
+      <div class="image-frame">
+        <img src="images/FORD F-SERIES THRU THE YEARS.jpg" alt="Ford F-Series through the years" onerror="this.src='https://picsum.photos/800/600?random=11'" />
+        <div class="caption">Replace this with a strong image that introduces your topic.</div>
+      </div>
     </section>
 
-    <section id="about">
-      <h2 class="section-title">About Me</h2>
-      <p class="section-subtitle">A short section where you can explain who you are and what this website is about.</p>
-      <div class="about-card">
+    <section id="overview" class="slide intro">
+      <div class="centered">
+        <div class="eyebrow">Overview</div>
+        <h2>What This Presentation Is About</h2>
         <p>
-          Write a short paragraph here about yourself, your interests, your school, your work, or whatever
-          this website is meant to show. You can make this a personal page, a project page, a club page,
-          a portfolio, or a photo gallery.
+          Add a short summary of your project here. This section works like your introduction slide. You can explain the main idea, why it matters, and what the viewer should notice as they scroll.
         </p>
-      </div>
-    </section>
 
-    <section id="gallery">
-      <h2 class="section-title">Image Gallery</h2>
-      <p class="section-subtitle">Replace these with your own images by adding files to an images folder.</p>
-
-      <div class="gallery">
-        <div class="gallery-card">
-          <img src="images/photo1.jpg" alt="Gallery image one" onerror="this.src='https://picsum.photos/600/400?random=2'" />
-          <div>
-            <h3>Photo One</h3>
-            <p>Add a short caption here.</p>
+        <div class="stat-grid">
+          <div class="stat-card">
+            <div class="stat-number">01</div>
+            <h3>Main Idea</h3>
+            <p>Explain the first important point or theme.</p>
           </div>
-        </div>
 
-        <div class="gallery-card">
-          <img src="images/photo2.jpg" alt="Gallery image two" onerror="this.src='https://picsum.photos/600/400?random=3'" />
-          <div>
-            <h3>Photo Two</h3>
-            <p>Add a short caption here.</p>
+          <div class="stat-card">
+            <div class="stat-number">02</div>
+            <h3>Key Moment</h3>
+            <p>Explain one major event, scene, or turning point.</p>
           </div>
-        </div>
 
-        <div class="gallery-card">
-          <img src="images/photo3.jpg" alt="Gallery image three" onerror="this.src='https://picsum.photos/600/400?random=4'" />
-          <div>
-            <h3>Photo Three</h3>
-            <p>Add a short caption here.</p>
+          <div class="stat-card">
+            <div class="stat-number">03</div>
+            <h3>Why It Matters</h3>
+            <p>Explain the overall meaning or takeaway.</p>
           </div>
         </div>
       </div>
     </section>
 
-    <section id="projects">
-      <h2 class="section-title">Projects</h2>
-      <p class="section-subtitle">Use this section to show school projects, GitHub projects, clubs, writing, or anything else.</p>
+    <section id="timeline" class="slide timeline-slide">
+      <div class="centered">
+        <div class="eyebrow">Timeline</div>
+        <h2>Story / Event Timeline</h2>
+        <p>Each timeline block can represent a date, event, chapter, scene, milestone, or step in your project.</p>
+      </div>
 
-      <div class="projects">
-        <div class="project-card">
-          <h3>Project One</h3>
-          <p>Describe your first project here. You can also add a link to another page or GitHub repository.</p>
+      <div class="timeline">
+        <div class="timeline-item">
+          <div class="dot"></div>
+          <div class="timeline-content">
+            <span class="year">Step 1</span>
+            <h3>Beginning</h3>
+            <p>Describe what happens first. Keep it short, almost like a presentation bullet point.</p>
+          </div>
+          <div class="timeline-image">
+            <img src="images/timeline1.jpg" alt="Timeline image one" onerror="this.src='https://picsum.photos/700/400?random=21'" />
+          </div>
         </div>
 
-        <div class="project-card">
-          <h3>Project Two</h3>
-          <p>Describe your second project here. Keep it short and clear.</p>
+        <div class="timeline-item">
+          <div class="dot"></div>
+          <div class="timeline-content">
+            <span class="year">Step 2</span>
+            <h3>Conflict or Change</h3>
+            <p>Describe the next important moment. This could be a problem, discovery, or turning point.</p>
+          </div>
+          <div class="timeline-image">
+            <img src="images/timeline2.jpg" alt="Timeline image two" onerror="this.src='https://picsum.photos/700/400?random=22'" />
+          </div>
         </div>
 
-        <div class="project-card">
-          <h3>Project Three</h3>
-          <p>Describe your third project here. This can be edited or deleted.</p>
+        <div class="timeline-item">
+          <div class="dot"></div>
+          <div class="timeline-content">
+            <span class="year">Step 3</span>
+            <h3>Important Moment</h3>
+            <p>Explain the most important event or piece of evidence. Add the image that best matches it.</p>
+          </div>
+          <div class="timeline-image">
+            <img src="images/timeline3.jpg" alt="Timeline image three" onerror="this.src='https://picsum.photos/700/400?random=23'" />
+          </div>
+        </div>
+
+        <div class="timeline-item">
+          <div class="dot"></div>
+          <div class="timeline-content">
+            <span class="year">Step 4</span>
+            <h3>Conclusion</h3>
+            <p>Wrap up the timeline and explain what changed by the end.</p>
+          </div>
+          <div class="timeline-image">
+            <img src="images/timeline4.jpg" alt="Timeline image four" onerror="this.src='https://picsum.photos/700/400?random=24'" />
+          </div>
         </div>
       </div>
     </section>
 
-    <section id="contact" class="contact">
-      <h2 class="section-title">Contact</h2>
-      <p>Want to reach me? Add your email, Instagram, LinkedIn, or GitHub here.</p>
-      <a class="button" href="mailto:your-email@example.com">Email Me</a>
+    <section id="gallery" class="slide gallery-slide">
+      <div class="centered">
+        <div class="eyebrow">Image Slides</div>
+        <h2>Supporting Images</h2>
+        <p>Use this part like extra presentation slides for visuals, evidence, examples, or project highlights.</p>
+      </div>
+
+      <div class="gallery-grid">
+        <div class="gallery-card">
+          <img src="images/photo1.jpg" alt="Supporting image one" onerror="this.src='https://picsum.photos/600/450?random=31'" />
+          <div>
+            <h3>Image Point One</h3>
+            <p>Add a caption explaining why this image is important.</p>
+          </div>
+        </div>
+
+        <div class="gallery-card">
+          <img src="images/photo2.jpg" alt="Supporting image two" onerror="this.src='https://picsum.photos/600/450?random=32'" />
+          <div>
+            <h3>Image Point Two</h3>
+            <p>Add another caption or short explanation here.</p>
+          </div>
+        </div>
+
+        <div class="gallery-card">
+          <img src="images/photo3.jpg" alt="Supporting image three" onerror="this.src='https://picsum.photos/600/450?random=33'" />
+          <div>
+            <h3>Image Point Three</h3>
+            <p>Use this for another image, quote, event, or example.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="ending" class="slide final-slide">
+      <div class="centered">
+        <div class="eyebrow">Final Slide</div>
+        <h2>Final Takeaway</h2>
+        <p>
+          End with your strongest point. This could be the lesson, conclusion, theme, or main message of your presentation.
+        </p>
+        <br />
+        <a class="button" href="#start">Back to Top</a>
+      </div>
     </section>
   </main>
 
